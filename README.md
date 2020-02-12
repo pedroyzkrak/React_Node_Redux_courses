@@ -1,2 +1,2 @@
 # React_Node_Redux_courses
- Studying
+ Repository used to study react, redux and hopefully other related stuff.
