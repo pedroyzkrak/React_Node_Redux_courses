@@ -7,24 +7,45 @@ import 'react-app-polyfill/ie9';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Other imports
+import faker from 'faker';
+import CommentDetail from './CommentDetail';
+import ApprovalCard from './ApprovalCard';
+
 const App = () => {
     return (
         <div className="ui container comments">
-            <div className="comment">
-                <a href="/" className="avatar">
-                    <img alt="avatar" />
-                </a>
-                <div className="content">
-                    <a href="/" className="author">
-                        Sam
-                    </a>
-                    <div className="metadata">
-                        <span className="date">Today at 6:00 PM</span>
-                    </div>
-                    <div className="text">Nice blog post!</div>
-                </div>
-            </div>
+            <ApprovalCard
+            greenbt={<i className="thumbs up outline icon"/>} 
+            redbt={<i className="thumbs down outline icon"/>}>
+                <CommentDetail 
+                avatar={faker.image.avatar()} 
+                comment={faker.lorem.words()} 
+                author={faker.name.firstName()} 
+                timeAgo={faker.date.weekday()} />
+            </ApprovalCard>
+
+            <ApprovalCard 
+            greenbt={<i className="thumbs up outline icon"/>} 
+            redbt={<i className="thumbs down outline icon"/>}>
+                <CommentDetail 
+                avatar={faker.image.avatar()} 
+                author={faker.name.firstName()} 
+                comment={faker.lorem.words()} 
+                timeAgo={faker.date.weekday()} />
+            </ApprovalCard>
+
+            <ApprovalCard 
+            greenbt={<i className="thumbs up outline icon"/>} 
+            redbt={<i className="thumbs down outline icon"/>}>
+                <CommentDetail 
+                avatar={faker.image.avatar()} 
+                author={faker.name.firstName()} 
+                comment={faker.lorem.words()} 
+                timeAgo={"Last "+faker.date.weekday()} /> 
+            </ApprovalCard>
         </div>
+        
 
 
     );        
