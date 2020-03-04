@@ -10,21 +10,40 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { lat: null };
+        this.state = { lat: null, errorMessage: "" };
 
+
+    }
+
+    componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
             (position) => {
                 //IMPORTANT
                 this.setState({ lat: position.coords.latitude });
             },
-            (err) => console.log(err)
+            (err) => {
+                this.setState({ errorMessage: err.message });
+            }
         );
+    }
+
+    componentDidUpdate() {
+        console.log('State was updated so my component rerendered.');
+    }
+
+    componentWillUnmount() {
+        //used when a component is removed, for not related clean-up purposes
     }
 
     // React requirement!
     render() {
-        
-        return <div>Latitude: {this.state.lat}</div>;
+        if(this.state.errorMessage && !this.state.lat) {
+            return <div>Error: {this.state.errorMessage} </div>;
+        }
+        if (!this.state.errorMessage && this.state.lat) {
+            return <div>Latitude: {this.state.lat} </div>;
+        }
+        return <div>Loading!</div>;
     }
 
 
