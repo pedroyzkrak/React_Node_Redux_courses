@@ -35,8 +35,8 @@ class App extends React.Component {
         //used when a component is removed, for not related clean-up purposes
     }
 
-    // React requirement!
-    render() {
+    //helper method
+    renderContent() {
         if(this.state.errorMessage && !this.state.lat) {
             return <div>Error: {this.state.errorMessage} </div>;
         }
@@ -44,6 +44,16 @@ class App extends React.Component {
             return <SeasonDisplay lat={this.state.lat}/>;
         }
         return <Spinner loadingMessage="Waiting for location allowance..."/>;
+    }
+    // React requirement! The classname border red is just an example to not use conditional statements 
+    //inside the render method
+    render() {
+        return (
+            <div className="border red"> 
+                {this.renderContent()}
+            </div>
+
+        );
     }
 
 
